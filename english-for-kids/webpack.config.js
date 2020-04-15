@@ -4,16 +4,19 @@ const webpack = require('webpack');
 const path = require('path');
 // eslint-disable-next-line no-undef
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+// eslint-disable-next-line no-undef
+const CopyPlugin = require('copy-webpack-plugin');
 
 // eslint-disable-next-line no-undef
 module.exports =  ( env, argv ) => {
-  const isDevelopmentMode = ( argv.mode === "development" );
+
+    const isDevelopmentMode = ( argv.mode === "development" );
 
 	// Locally, we want robust source-maps. However, in production, we want something
 	// that can help with debugging without giving away all of the source-code. This
 	// production setting will give us proper file-names and line-numbers for debugging;
 	// but, without actually providing any code content.
-	const devtool = isDevelopmentMode ? "source-map" : "nosources-source-map";
+    const devtool = isDevelopmentMode ? "source-map" : "nosources-source-map";
 
   // By default, each module is identified based on Webpack's internal ordering. This
 	// can cause issues for cache-busting and long-term browser caching as a localized
@@ -26,7 +29,11 @@ module.exports =  ( env, argv ) => {
 	const moduleIdentifierPlugin = isDevelopmentMode ? new webpack.NamedModulesPlugin() : new webpack.HashedModuleIdsPlugin();
 
   return({
-        entry: './src/index.js',
+      // devServer: {
+      //     // eslint-disable-next-line no-undef
+      //     contentBase: [path.join(__dirname, 'public'), path.join(__dirname, 'assets')]
+      // },
+        entry: ['./src/index.js', './src/scss/app.scss'],
         output: {
             // eslint-disable-next-line no-undef
           path: path.resolve(__dirname, 'dist'),
@@ -39,10 +46,6 @@ module.exports =  ( env, argv ) => {
                     test: /\.js$/,
                     use: 'babel-loader',
                     exclude: /node_modules/
-                  },
-                  {
-                    test: /\.css$/,
-                    use: ['style-loader', 'css-loader']
                   },
                   {
                     test: /\.scss$/,
@@ -70,19 +73,22 @@ module.exports =  ( env, argv ) => {
         },
 
         plugins: [
-          new HtmlWebpackPlugin({
-            title: "English for Kids",
-            filename: 'index.html',
-            template: './public/index.html',
-            inject: true,
-            chunks: ['index'],
-            // favicon: path.join(__dirname, '/public/favicon.ico'),
-            'meta': {
-              'viewport': 'width=device-width, initial-scale=1, shrink-to-fit=no',
-              'msapplication-TileColor': '#da532c',
-              'theme-color': '#ffffff'
-            }
-          })
+            new HtmlWebpackPlugin({
+                title: "English for Kids",
+                filename: 'index.html',
+                template: './public/index.html',
+                inject: true,
+                chunks: ['index'],
+                // favicon: path.join(__dirname, '/public/favicon.ico'),
+                'meta': {
+                  'viewport': 'width=device-width, initial-scale=1, shrink-to-fit=no',
+                  'msapplication-TileColor': '#da532c',
+                  'theme-color': '#ffffff'
+                }
+          }),
+            new CopyPlugin([
+                { from: 'public/assets', to: 'assets/' },
+            ]),
         ]
   });
 }

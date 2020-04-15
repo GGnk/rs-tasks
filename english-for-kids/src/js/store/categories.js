@@ -1,6 +1,9 @@
-const cards = [ 
-    ['Action (set A)', 'Action (set B)', 'Animal (set A)', 'Animal (set B)', 'Clothes', 'Emotions'],
-    [
+const categories = [
+  {
+    id: 1,
+    name: 'Action (set A)',
+    img: 'img/actionSetA.jpg',
+    cards : [
       {
         word: 'cry',
         translation: 'плакать',
@@ -49,8 +52,13 @@ const cards = [
         image: 'img/jump.jpg',
         audioSrc: 'audio/jump.mp3'
       }
-    ],
-    [
+    ]
+  },
+  {
+    id: 2,
+    name:'Action (set B)',
+    img: 'img/actionSetB.jpg',
+    cards : [
       {
         word: 'open',
         translation: 'открывать',
@@ -99,8 +107,13 @@ const cards = [
         image: 'img/swim.jpg',
         audioSrc: 'audio/swim.mp3'
       }
-    ],
-    [
+    ]
+  },
+  {
+    id: 3,
+    name:'Animal (set A)',
+    img: 'img/animalSetA.jpg',
+    cards : [
       {
         word: 'cat',
         translation: 'кот',
@@ -149,8 +162,13 @@ const cards = [
         image: 'img/sheep.jpg',
         audioSrc: 'audio/sheep.mp3'
       }
-    ],
-    [
+  ]
+  },
+  {
+    id: 4,
+    name:'Animal (set B)',
+    img: 'img/animalSetB.jpg',
+    cards : [
       {
         word: 'bird',
         translation: 'птица',
@@ -199,8 +217,13 @@ const cards = [
         image: 'img/dolphin.jpg',
         audioSrc: 'audio/dolphin.mp3'
       }
-    ],
-    [
+    ]
+  },
+  {
+    id: 5,
+    name:'Clothes',
+    img: 'img/clothes.jpg',
+    cards : [
       {
         word: 'skirt',
         translation: 'юбка',
@@ -249,8 +272,13 @@ const cards = [
         image: 'img/shoe.jpg',
         audioSrc: 'audio/shoe.mp3'
       }
-    ],
-    [
+    ]
+  },
+  {
+    id: 6,
+    name:'Emotions',
+    img: 'img/emotion.jpg',
+    cards : [
       {
         word: 'sad',
         translation: 'грустный',
@@ -300,6 +328,7 @@ const cards = [
         audioSrc: 'audio/laugh.mp3'
       }
     ]
-  ]
+  }
+]
 
-export default cards;
+export default categories;

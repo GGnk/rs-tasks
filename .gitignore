@@ -1,4 +1,4 @@
-dist/*
-node_modules/
-*.log
+english-for-kids/dist/*
+english-for-kids/node_modules
+english-for-kids/*.log
 .idea
