@@ -1,69 +1,92 @@
-import "./js/store/config"
+import { state, getters } from "./js/store/config"
 import "./js/store/routes"
-import "./js/store/categories"
-
-const MODES = {
-    train: 'train',
-    play: 'play'
-}
 
 import categories from "./js/store/categories";
 
-// const mainPage = document.getElementById('main');
-// const categoryPage = document.getElementById('category');
-
 const container = document.getElementById('pageContainer');
 
-// const categoryList = document.getElementById('categoryList');
-// const wordsList = document.getElementById('wordList');
+const cards_container = document.getElementById('cardsContainer');
 
 // document.getElementById('swither').addEventListener('change', (event) => {
 //     cardList.changeMode(MODES.play);
 // })
 
-class CardList {
+class CategoryCardList {
     constructor(state) {
-        this.state = state;
+        this.cats = state;
 
-        this.state.forEach(item => {
-            container.append(this.createElement(item.img, item.name));
+        this.cats.forEach(item => {
+            container.append(this.createElement(item));
         });
 
-        // this.cards = this.state.map(singleState => {
-        //     const card = new Card(singleState);
-        //
-        //     this.wordsList.append(card.createElement());
-        //
-        //     return card;
-        // });
+        container.style = "display: flex"
+        cards_container.style = "display: none"
     }
-    changeMode(mode) {
-        this.cards.forEach(card => card.changeMode(mode));
-    }
-    createElement(image, name) {
+
+    createElement(card) {
         const cardElement = document.createElement('a');
-        cardElement.className = "main-card green";
-        cardElement.href = "#/cards";
-        cardElement.innerHTML =`<img src="assets/${image}" alt="${name}">${name}`;
+        cardElement.className = "cardshow main-card green";
+        cardElement.id = card.id
+        cardElement.innerHTML =`<img src="assets/${card.img}" alt="${card.name}">${card.name}`;
 
         return cardElement
     }
+
 }
-class Card {
+class ShowCards {
     constructor(state) {
-        this.state = state;
-    }
-    createElement() {
-        const cardElement = document.createElement('a');
-        cardElement.innerHTML(`<img src="${image}" alt="Action (set A)">Action (set A)`);
+        this.cards = state;
 
+        this.cards.forEach(item => {
+            cards_container.insertBefore(this.createElement(item), document.querySelector("audio"));
+        })
+        cards_container.style = "display: flex"
+        container.style = "display: none"
+
+        let back = document.querySelectorAll(".card");
+        console.log(back)
+
+        back.forEach((elem)=>{
+            console.log(elem.parentElement)
+            elem.parentElement.addEventListener('click', (event)=> {
+                elem.classList.remove("translate")
+            })
+        })
+    }
+    createElement(card) {
+        const cardElement = document.createElement('div');
+        cardElement.className = "card-container";
+        cardElement.innerHTML = `
+            <div class="card">
+                <div class="front" style="background-image: url(assets/${card.image});">
+                    <div class="card-header">${card.word}</div>
+                </div>
+                <div id="back" class="back" style="background-image: url(assets/${card.image});">
+                    <div class="card-header">${card.translation}</div>
+                </div>
+                <div class="rotate"></div>
+            </div>
+        `;
         return cardElement
     }
 }
 
+const MouseUp = (event) => {
+    if (event.target.classList.contains('cardshow') || event.target.parentNode.classList.contains('cardshow')) {
+        let card_id = event.target.parentNode.classList.contains('cardshow') ? event.target.parentNode.id : event.target.id
+        
+        categories.find(item => {
+            if(item.id == card_id) new ShowCards(item.cards)
+        })
+    } else if(event.target.classList.contains('rotate')) {
+        event.target.parentNode.classList.toggle("translate");
+    }
+}
 
 document.onreadystatechange = function(){
     if(document.readyState === 'complete'){
-        new CardList(categories);
+        new CategoryCardList(categories);
+
+        document.addEventListener('click', MouseUp);
     }
 }
