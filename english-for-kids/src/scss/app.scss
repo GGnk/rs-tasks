@@ -17,7 +17,7 @@ header {
     justify-content: space-between;
     width: 100%;
     height: 45px;
-    max-width: 1350px;
+    max-width: 1000px;
     margin: 40px auto 0;
 
     @media (max-width: 1080px){max-width: 650px;}
@@ -87,8 +87,9 @@ header {
     }
 }
 
-.succes{background-image:url(/static/media/success.3a079626.jpg)}
-.failure{background-image:url(/static/media/failure.ef048b74.jpg)}
+
+.succes{background-image:url(../../assets/img/success.3a079626.jpg)}
+.failure{background-image:url(../../assets/img/failure.ef048b74.jpg)}
 .container{display:flex;flex-wrap:wrap;justify-content:center;padding:20px 15px;max-width:1440px;margin:auto}
 .container h2{
     width:100%;font-size:40px;margin:0;text-align:center;font-family:Roboto;
@@ -111,7 +112,7 @@ header {
 .inactive{opacity:.5}
 .rotate{
     position:absolute;width:50px;height:50px;
-    background-image:url(/static/media/rotate.229f42dc.png);
+    background-image:url(../../assets/img/rotate.png);
     background-size:32px;background-repeat:no-repeat;
     background-position:center 16px;bottom:5px;right:5px;
     -webkit-transition:.3s;transition:.3s;
@@ -149,17 +150,17 @@ header {
     border-width:1px;-webkit-transition:.3s;transition:.3s}
 .repeat{
     width:65px;font-size:0;
-    background-image:url(/static/media/repeat.d0f11196.svg),linear-gradient(40deg,#ffd86f,#fc6262);
+    background-image:url(../../assets/img/repeat.svg),linear-gradient(40deg,#ffd86f,#fc6262);
     border-radius:50%;background-repeat:no-repeat;background-size:32px 32px,cover;
     background-position:50%}
 .none{box-sizing:border-box;opacity:0;width:0;height:0;font-size:0;margin:0;padding:0}
 .rating{
     display:flex;justify-content:flex-end;width:100%;max-width:1350px;
     margin:0 auto;height:40px;overflow-x:hidden;line-height:36px;font-size:36px;color:#fc6262}
-.star-error{background-image:url(/static/media/star.dc1ba888.svg)}
+.star-error{background-image:url(../../assets/img/star.svg)}
 .star-error,.star-succes{flex-shrink:0;width:40px;min-width:40px;height:40px;
     background-size:40px 40px}
-.star-succes{background-image:url(/static/media/star-win.43e453a6.svg)}
+.star-succes{background-image:url(../../assets/img/star-win.svg)}
 @media (max-width:730px){
     .btn{width:300px}}
 @media (max-width:430px){
@@ -190,12 +191,24 @@ nav{position:relative}
 .menuToggle input:checked~span:nth-last-child(3){opacity:0;-webkit-transform:rotate(0deg) scale(.2);transform:rotate(0deg) scale(.2)}
 .menuToggle input:checked~span:nth-last-child(2){opacity:1;-webkit-transform:rotate(-45deg) translateY(-1px);
     transform:rotate(-45deg) translateY(-1px)}
-.menu{display:flex;flex-direction:column;box-sizing:border-box;position:absolute;width:380px;
-    height:calc(100vh + 20px);margin:-100px 0 0;padding:125px 50px 50px;left:calc(675px - 50vw);
-    background:linear-gradient(40deg,#ffd86f,#fc6262);list-style-type:none;-webkit-font-smoothing:antialiased;
-    -webkit-transform-origin:0 0;transform-origin:0 0;-webkit-transform:translate(-100%);
-    transform:translate(-100%);-webkit-transition:-webkit-transform .5s cubic-bezier(.77,.2,.05,1);transition:
-        -webkit-transform .5s cubic-bezier(.77,.2,.05,1);transition:transform .5s cubic-bezier(.77,.2,.05,1);
+.menu{
+    display:flex;
+    flex-direction:column;
+    box-sizing:border-box;
+    position:absolute;width:380px;
+    height:calc(100vh + 20px);
+    margin:-100px 0 0;
+    padding:125px 50px 50px;left:calc(675px - 50vw);
+    background:linear-gradient(40deg,#ffd86f,#fc6262);
+    list-style-type:none;
+    -webkit-font-smoothing:antialiased;
+    -webkit-transform-origin:0 0;
+    transform-origin:0 0;
+    -webkit-transform:translate(-100%);
+    transform:translate(-100%);
+    -webkit-transition:-webkit-transform .5s cubic-bezier(.77,.2,.05,1);
+    transition: -webkit-transform .5s cubic-bezier(.77,.2,.05,1);
+    transition:transform .5s cubic-bezier(.77,.2,.05,1);
     transition:transform .5s cubic-bezier(.77,.2,.05,1),-webkit-transform .5s cubic-bezier(.77,.2,.05,1)}
 .menu.green{background:linear-gradient(40deg,#00bf82,#0099ae)}
 .header-item{padding:10px 0;font-size:22px;cursor:pointer;text-decoration:none}

@@ -1,4 +1,4 @@
-import { state, getters } from "./js/store/config"
+import {config} from "./js/store/config"
 import "./js/store/routes"
 
 import categories from "./js/store/categories";
@@ -7,9 +7,9 @@ const container = document.getElementById('pageContainer');
 
 const cards_container = document.getElementById('cardsContainer');
 
-// document.getElementById('swither').addEventListener('change', (event) => {
-//     cardList.changeMode(MODES.play);
-// })
+ document.querySelector('input[name=switch]').addEventListener('change', (event) => {
+    config.checked(event.target.checked)
+ })
 
 class CategoryCardList {
     constructor(state) {
@@ -21,6 +21,8 @@ class CategoryCardList {
 
         container.style = "display: flex"
         cards_container.style = "display: none"
+
+        config.checked(!config.play)
     }
 
     createElement(card) {
@@ -44,14 +46,15 @@ class ShowCards {
         container.style = "display: none"
 
         let back = document.querySelectorAll(".card");
-        console.log(back)
+        config.logger(config.cat)
 
         back.forEach((elem)=>{
-            console.log(elem.parentElement)
             elem.parentElement.addEventListener('click', (event)=> {
                 elem.classList.remove("translate")
             })
         })
+
+        config.checked(!config.play);
     }
     createElement(card) {
         const cardElement = document.createElement('div');
@@ -72,14 +75,19 @@ class ShowCards {
 }
 
 const MouseUp = (event) => {
+
     if (event.target.classList.contains('cardshow') || event.target.parentNode.classList.contains('cardshow')) {
         let card_id = event.target.parentNode.classList.contains('cardshow') ? event.target.parentNode.id : event.target.id
-        
+
         categories.find(item => {
             if(item.id == card_id) new ShowCards(item.cards)
+            config.cat = item
         })
     } else if(event.target.classList.contains('rotate')) {
         event.target.parentNode.classList.toggle("translate");
+
+    } else if(event.target.classList.contains('btn')) {
+        config.game()
     }
 }
 
