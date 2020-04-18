@@ -21,25 +21,26 @@
     </noscript>
     <div id="app">
       <header>
-          <nav role="navigation">
+        <nav role="navigation">
             <div class="menuToggle">
               <input type="checkbox"><span></span><span></span><span></span>
               <ul class="menu green">
                 <a class="header-item active" href="#/">Main Page</a>
-                <a class="header-item" href="#/cards">Action (set A)</a>
-                <a class="header-item" href="#/cards">Action (set B)</a>
-                <a class="header-item" href="#/cards">Action (set C)</a>
-                <a class="header-item" href="#/cards">Adjective</a>
-                <a class="header-item" href="#/cards">Animal (set A)</a>
-                <a class="header-item" href="#/cards">Animal (set B)</a>
-                <a class="header-item" href="#/cards">Clothes</a>
-                <a class="header-item" href="#/cards">Emotion</a>
+                <a class="header-item" >Action (set A)</a>
+                <a class="header-item" >Action (set B)</a>
+                <a class="header-item" >Action (set C)</a>
+                <a class="header-item" >Adjective</a>
+                <a class="header-item" >Animal (set A)</a>
+                <a class="header-item" >Animal (set B)</a>
+                <a class="header-item" >Clothes</a>
+                <a class="header-item" >Emotion</a>
               </ul>
             </div>
           </nav>
+        <div class="btns"><button class="btn none">Start game</button></div>
         <div class="switch-container">
           <label class="switch">
-            <input type="checkbox" class="switch-input" checked="">
+            <input type="checkbox" class="switch-input" name="switch" checked="">
             <span class="switch-label" data-on="Train" data-off="Play">
 
             </span><span class="switch-handle"></span>
@@ -52,7 +53,7 @@
 
       <div id="cardsContainer" class="container">
         <div class="rating none"></div>
-        
+
         <audio class="audio"></audio>
         <audio class="soundEffects"></audio>
       </div>

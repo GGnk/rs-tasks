@@ -9,7 +9,7 @@
     "dev": "webpack -d --mode development",
     "watch": "webpack -d --mode development --watch",
     "prod": "webpack -p --mode production",
-    "server": "webpack-dev-server"
+    "start": "webpack-dev-server"
   },
   "repository": {
     "type": "git",
@@ -32,6 +32,7 @@
     "babel-loader": "^8.1.0",
     "copy-webpack-plugin": "^5.1.1",
     "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.1.0",
     "file-loader": "^6.0.0",
     "html-webpack-plugin": "^4.2.0",
     "html-webpack-template": "^6.2.0",
