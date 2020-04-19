@@ -260,7 +260,7 @@ document.onreadystatechange = function(){
                     if(item.id == card_id) new ShowCards(item)
                 })
                 document.querySelector("input[type=checkbox]").checked = false
-                document.querySelector(".switch-input").checked = false
+                document.querySelector(".switch-input").checked = true
             }
         })
 
