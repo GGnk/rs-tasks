@@ -4,7 +4,8 @@ export const config = {
     cat: [],
 
 
-    logger(obj) {
+    logger(obj, classname) {
+        if(classname) console.log("---- "+classname+" ----")
         console.log(obj)
     },
 
@@ -16,7 +17,6 @@ export const config = {
         let menu = document.querySelector(".menu")
 
         if(mode) {
-            config.play = false;
             pageCardsCat.forEach(item => item.classList.add("green"));
             menu.classList.add("green");
             cardsCat.forEach(item => item.classList.remove("card-cover"));
@@ -26,7 +26,7 @@ export const config = {
                 btns.childNodes.forEach(item => item.classList.remove("repeat"));
             }
         } else {
-            config.play = true;
+            config.play = false;
             pageCardsCat.forEach(item => item.classList.remove("green"));
             menu.classList.remove("green");
             cardsCat.forEach(item => item.classList.add("card-cover"));
@@ -35,11 +35,5 @@ export const config = {
                 btns.childNodes.forEach(item => item.classList.remove("none"));
             }
         }
-    },
-
-    game() {
-        if(this.play === true) this.logger("Играй начилась!!")
-        btns.childNodes.forEach(item => item.classList.add("repeat"));
-
     }
 }
