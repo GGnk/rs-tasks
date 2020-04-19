@@ -7,6 +7,7 @@ body{
     overflow-x: hidden;
 
     #app {
+        position: absolute;
         min-height: 100vh;
     }
     @media (max-width:430px){background-size:300px 300px}
@@ -87,10 +88,28 @@ header {
     }
 }
 
+.home:hover img {
+    opacity: 1;
+}
+.home img {
+    height: 44px;
+    opacity: 0.4;
+}
+.cat-text {
+    text-align: center;
+}
+.cat-text span {
+    font-size: 3vw;
+    opacity: 0.6;
+}
 
-.succes{background-image:url(../../assets/img/success.3a079626.jpg)}
-.failure{background-image:url(../../assets/img/failure.ef048b74.jpg)}
-.container{display:flex;flex-wrap:wrap;justify-content:center;padding:20px 15px;max-width:1440px;margin:auto}
+.container{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    padding:0 15px;
+    max-width:1440px;
+    margin:auto}
 .container h2{
     width:100%;font-size:40px;margin:0;text-align:center;font-family:Roboto;
     text-transform:uppercase;
@@ -150,17 +169,61 @@ header {
     border-width:1px;-webkit-transition:.3s;transition:.3s}
 .repeat{
     width:65px;font-size:0;
-    background-image:url(../../assets/img/repeat.svg),linear-gradient(40deg,#ffd86f,#fc6262);
+    background-image:url(../../assets/img/repeat.svg), linear-gradient(40deg,#ffd86f,#fc6262);
     border-radius:50%;background-repeat:no-repeat;background-size:32px 32px,cover;
     background-position:50%}
 .none{box-sizing:border-box;opacity:0;width:0;height:0;font-size:0;margin:0;padding:0}
 .rating{
-    display:flex;justify-content:flex-end;width:100%;max-width:1350px;
-    margin:0 auto;height:40px;overflow-x:hidden;line-height:36px;font-size:36px;color:#fc6262}
-.star-error{background-image:url(../../assets/img/star.svg)}
-.star-error,.star-succes{flex-shrink:0;width:40px;min-width:40px;height:40px;
+    display:flex;
+    justify-content:center;
+    width:100%;
+    max-width:1350px;
+    margin:0 auto;
+    height:40px;
+    overflow-x:hidden;
+    line-height:36px;
+    font-size:36px;
+    color:#fc6262}
+.star-error{
+    background-image:url(../../assets/img/star.svg)
+}
+.star-success{
+    background-image:url(../../assets/img/star-win.svg)
+}
+.star-error,.star-success{
+    flex-shrink:0;
+    width:40px;
+    min-width:40px;
+    height:40px;
     background-size:40px 40px}
-.star-succes{background-image:url(../../assets/img/star-win.svg)}
+.end {
+    position: absolute;
+    height: calc(100%);
+    width: 100vw;
+    background-color: white;
+}
+.none_end {
+    display: none;
+}
+.result {
+    width: 10%;
+    margin: 50px auto;
+    font-size: 32px;
+}
+.end-failure .img {
+    background-image: url(../../assets/img/failure.jpg);
+    background-repeat: no-repeat;
+    margin: 0 auto;
+    width: 38%;
+    height: 50%;
+}
+.end-success .img {
+    background-image:url(../../assets/img/success.jpg);
+    background-repeat: no-repeat;
+    margin: 0 auto;
+    width: 38%;
+    height: 50%;
+}
 @media (max-width:730px){
     .btn{width:300px}}
 @media (max-width:430px){

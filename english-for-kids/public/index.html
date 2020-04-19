@@ -20,24 +20,19 @@
       <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>
     <div id="app">
+
       <header>
         <nav role="navigation">
             <div class="menuToggle">
               <input type="checkbox"><span></span><span></span><span></span>
-              <ul class="menu green">
-                <a class="header-item active" href="#/">Main Page</a>
-                <a class="header-item" >Action (set A)</a>
-                <a class="header-item" >Action (set B)</a>
-                <a class="header-item" >Action (set C)</a>
-                <a class="header-item" >Adjective</a>
-                <a class="header-item" >Animal (set A)</a>
-                <a class="header-item" >Animal (set B)</a>
-                <a class="header-item" >Clothes</a>
-                <a class="header-item" >Emotion</a>
+              <ul id="menu" class="menu green">
+                <a class="header-item home none_end">Main Page</a>
               </ul>
             </div>
           </nav>
-        <div class="btns"><button class="btn none">Start game</button></div>
+        <div class="home none_end">
+          <img src="./assets/img/home.svg" alt="">
+        </div>
         <div class="switch-container">
           <label class="switch">
             <input type="checkbox" class="switch-input" name="switch" checked="">
@@ -48,6 +43,10 @@
         </div>
 
       </header>
+      <div class="cat-text none_end">
+        <span>Category: </span><span class="cat_name"></span>
+      </div>
+      <div class="btns"><button class="btn none">Start game</button></div>
 
       <main id="pageContainer" class="container main-container"></main>
 
@@ -58,6 +57,10 @@
         <audio class="soundEffects"></audio>
       </div>
 
+    </div>
+    <div class="end none_end">
+      <div class="result"></div>
+      <div class="img"></div>
     </div>
   </body>
   <script type="text/javascript" src="scripts.js"></script>

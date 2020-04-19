@@ -111,6 +111,116 @@ const categories = [
   },
   {
     id: 3,
+    name:'Action (set C)',
+    img: 'img/drop.jpg',
+    cards : [
+      {
+        word: 'argue',
+        translation: 'спорить',
+        image: 'img/argue.jpg',
+        audioSrc: 'audio/argue.mp3'
+      },
+      {
+        word: 'build',
+        translation: 'строить',
+        image: 'img/build.jpg',
+        audioSrc: 'audio/build.mp3'
+      },
+      {
+        word: 'carry',
+        translation: 'нести',
+        image: 'img/carry.jpg',
+        audioSrc: 'audio/carry.mp3'
+      },
+      {
+        word: 'catch',
+        translation: 'ловить',
+        image: 'img/catch.jpg',
+        audioSrc: 'audio/catch.mp3'
+      },
+      {
+        word: 'drive',
+        translation: 'водить машину',
+        image: 'img/drive.jpg',
+        audioSrc: 'audio/drive.mp3'
+      },
+      {
+        word: 'drop',
+        translation: 'падать',
+        image: 'img/drop.jpg',
+        audioSrc: 'audio/drop.mp3'
+      },
+      {
+        word: 'pull',
+        translation: 'тянуть',
+        image: 'img/pull.jpg',
+        audioSrc: 'audio/pull.mp3'
+      },
+      {
+        word: 'push',
+        translation: 'толкать',
+        image: 'img/push.jpg',
+        audioSrc: 'audio/push.mp3'
+      }
+    ]
+  },
+  {
+    id: 4,
+    name:'Adjective',
+    img: 'img/friendly.jpg',
+    cards : [
+      {
+        word: 'big',
+        translation: 'большой',
+        image: 'img/big.jpg',
+        audioSrc: 'audio/big.mp3'
+      },
+      {
+        word: 'small',
+        translation: 'маленький',
+        image: 'img/small.jpg',
+        audioSrc: 'audio/small.mp3'
+      },
+      {
+        word: 'fast',
+        translation: 'быстрый',
+        image: 'img/fast.jpg',
+        audioSrc: 'audio/fast.mp3'
+      },
+      {
+        word: 'slow',
+        translation: 'медленный',
+        image: 'img/slow.jpg',
+        audioSrc: 'audio/slow.mp3'
+      },
+      {
+        word: 'friendly',
+        translation: 'дружелюбный',
+        image: 'img/friendly.jpg',
+        audioSrc: 'audio/friendly.mp3'
+      },
+      {
+        word: 'unfriendly',
+        translation: 'недружелюбный',
+        image: 'img/unfriendly.jpg',
+        audioSrc: 'audio/unfriendly.mp3'
+      },
+      {
+        word: 'young',
+        translation: 'молодой',
+        image: 'img/young.jpg',
+        audioSrc: 'audio/young.mp3'
+      },
+      {
+        word: 'old',
+        translation: 'старый',
+        image: 'img/old.jpg',
+        audioSrc: 'audio/old.mp3'
+      }
+    ]
+  },
+  {
+    id: 5,
     name:'Animal (set A)',
     img: 'img/animalSetA.jpg',
     cards : [
@@ -165,7 +275,7 @@ const categories = [
   ]
   },
   {
-    id: 4,
+    id: 6,
     name:'Animal (set B)',
     img: 'img/animalSetB.jpg',
     cards : [
@@ -220,7 +330,7 @@ const categories = [
     ]
   },
   {
-    id: 5,
+    id: 7,
     name:'Clothes',
     img: 'img/clothes.jpg',
     cards : [
@@ -275,7 +385,7 @@ const categories = [
     ]
   },
   {
-    id: 6,
+    id: 8,
     name:'Emotions',
     img: 'img/emotion.jpg',
     cards : [

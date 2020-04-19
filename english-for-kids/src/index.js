@@ -10,7 +10,7 @@ const cards_container = document.getElementById('cardsContainer');
 var game = '';
 
  document.querySelector('input[name=switch]').addEventListener('change', (event) => {
-    config.checked(event.target.checked)
+     config.checked(event.target.checked)
  })
 
 class CategoryCardList {
@@ -37,16 +37,24 @@ class CategoryCardList {
     }
 
 }
+let btnHome = document.querySelectorAll(".home");
 class ShowCards {
     constructor(state) {
         this.cards = state.cards;
         config.cat = state
-        config.logger(config.cat, "ShowCards - начало")
-        config.logger(state, "ShowCards - state")
 
         config.checked(!config.play);
 
-        this.cards.forEach(item => {
+        document.querySelectorAll("#cardsContainer .card-container")
+            .forEach(item => item.remove());
+        document.querySelector(".rating").innerHTML = "";
+
+        btnHome.forEach(item => item.classList.remove("none_end"));
+
+        document.querySelector(".cat-text").classList.remove("none_end");
+        document.querySelector(".cat_name").textContent = state.name;
+
+            this.cards.forEach(item => {
             cards_container.insertBefore(this.createElement(item),
                 document.querySelector("audio"));
         })
@@ -56,8 +64,9 @@ class ShowCards {
         let back = document.querySelectorAll(".card");
 
         back.forEach((elem)=>{
-            elem.parentElement.addEventListener('click', (event)=> {
+            elem.parentElement.addEventListener('mouseleave', (event)=> {
                 elem.classList.remove("translate")
+
             })
         })
         config.checked(!config.play);
@@ -79,16 +88,45 @@ class ShowCards {
         return cardElement
     }
 }
+let menu = document.getElementById("menu");
 
+class CategoryCardListMenu {
+    constructor(state) {
+        this.cards = state;
+
+        this.cards.forEach(item => {
+            menu.insertBefore(this.createElement(item),
+                null);
+        })
+
+    }
+    createElement(card) {
+        const cardElement = document.createElement('a');
+        cardElement.className = "header-item click";
+        cardElement.id = card.id
+        cardElement.textContent = card.name
+        return cardElement
+    }
+}
+const audioPlay = document.querySelector(".audio");
+audioPlay.autoplay = true;
 class Game {
      constructor(target) {
          this.target = target
          this.count = 0;
-         this.success = [];
-         this.audio = document.querySelector(".audio");
-         this.audio.autoplay = true;
+         this.success = 0;
+         this.error = 0;
 
-         config.play = true
+         this.audio = audioPlay;
+         this.effect = document.querySelector(".soundEffects");
+         this.effect.autoplay = true;
+
+         this.rat = document.querySelector(".rating");
+         this.rat.classList.remove("none");
+
+         this.gameEnd = document.querySelector(".end");
+
+         config.play = true;
 
          document.querySelector(".btns")
              .childNodes.forEach(item => item.classList.add("repeat"));
@@ -97,7 +135,6 @@ class Game {
 
      }
      random() {
-
          for(let i = config.cat.cards.length - 1; i > 0; i--){
              let j = Math.floor(Math.random()*(i + 1));
              let temp = config.cat.cards[j];
@@ -105,18 +142,73 @@ class Game {
              config.cat.cards[i] = temp;
          }
      }
-     playAudio(src){
+     playAudio(src, effect){
+         if (effect) {
+             switch (effect) {
+                 case "success":
+                     this.effect.src = "./assets/audio/correct.mp3";
+                     break;
+                 case "error":
+                     this.effect.src = "./assets/audio/error.mp3";
+                     break;
+             }
+             return this.effect.play();
+         }
          if(!src) return this.audio.play()
          src = "./assets/"+src;
 
          this.audio.src = src
          this.audio.play()
      }
-     process(word) {
+     process(word, target) {
          if(word === config.cat.cards[this.count].word){
-             config.logger("Ты угадал")
-             this.count++
+             target.classList.add("inactive")
+             if(config.cat.cards[++this.count]){
+                 this.playAudio("", "success")
+                 this.ratting("success")
+                 this.success++
+                 this.playAudio(config.cat.cards[this.count].audioSrc)
+             } else {
+                 return this.end()
+             }
+         } else{
+             this.playAudio("", "error")
+             this.ratting("error")
+             this.error++
          }
+     }
+     ratting(answer) {
+         let ratElement = document.createElement('div');
+         ratElement.className = "star-"+answer;
+         this.rat.appendChild(ratElement)
+     }
+     end(){
+         config.play = false
+         cards_container.style = "display: none";
+         this.gameEnd.classList.remove("none_end");
+         if (this.error > 0) {
+             this.gameEnd.classList.add("end-failure");
+            this.gameEnd.children[0].innerText = this.error+" error!";
+         } else {
+             this.gameEnd.classList.add("end-success");
+             this.gameEnd.children[0].innerText = "Perfectly!!!"
+         }
+         config.checked(!config.play)
+         document.querySelector("input[name=switch]").checked = true
+
+         btnHome.forEach(item => item.classList.add("none_end"));
+         document.querySelector(".cat-text").classList.add("none_end");
+         setTimeout(() => {
+             this.error> 0 ?
+                 this.gameEnd.classList.remove("end-failure"):
+                 this.gameEnd.classList.remove("end-success");
+
+             this.gameEnd.classList.add("none_end");
+             container.style = "display: flex";
+             this.error = 0;
+             this.success = 0;
+             this.count = 0;
+         },2000);
 
      }
 
@@ -131,25 +223,53 @@ const MouseUp = (event) => {
         categories.find(item => {
             if(item.id == card_id) new ShowCards(item)
         })
-        config.logger(config.cat, "MouseUp - cardshow")
 
     } else if(event.target.classList.contains('rotate')) {
-        event.target.parentNode.classList.toggle("translate");
-
+        event.target.parentNode.classList.add("translate");
     } else if(event.target.classList.contains('btn')) {
         if (!config.play) return game = new Game(event.target);
         else game.playAudio()
-    } else if(event.target.classList.contains('front') && config.play){
-        let word = event.target.textContent.replace(/\s+/g, ' ').trim()
-        config.logger(word)
-        game.process(word)
+    } else if(event.target.classList.contains('front') && document.querySelector("input[name=switch]").checked && !config.play){
+        config.cat.cards.find(item => {
+            if(item.word === event.target.innerText) {
+                audioPlay.src = "./assets/"+item.audioSrc;
+                audioPlay.play()
+            }
+        })
+
+    } else if(event.target.classList.contains('front') && !event.target.classList.contains('inactive') && config.play){
+        let word = event.target.innerText;
+
+        game.process(word, event.target)
+    } else {
+        document.querySelector("input[type=checkbox]").checked = false
     }
 }
 
 document.onreadystatechange = function(){
     if(document.readyState === 'complete'){
         new CategoryCardList(categories);
-
+        new CategoryCardListMenu(categories);
         document.addEventListener('mouseup', MouseUp);
+
+        menu.addEventListener("click", (event) => {
+            if(event.target.classList.contains("click")){
+                let card_id = event.target.id
+
+                categories.find(item => {
+                    if(item.id == card_id) new ShowCards(item)
+                })
+                document.querySelector("input[type=checkbox]").checked = false
+                document.querySelector(".switch-input").checked = false
+            }
+        })
+
+        btnHome.forEach(item => item.addEventListener("click", () => {
+            btnHome.forEach(item => item.classList.add("none_end"));
+            document.querySelector(".cat-text").classList.add("none_end");
+            container.style = "display: flex";
+            cards_container.style = "display: none";
+            })
+        )
     }
 }

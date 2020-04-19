@@ -1,4 +1,3 @@
-const btns = document.querySelector(".btns");
 export const config = {
     play: false,
     cat: [],
@@ -13,7 +12,7 @@ export const config = {
         let pageCardsCat = document.querySelectorAll('#pageContainer > .cardshow');
         let cardsCat = document.querySelectorAll(".card-container > .card");
         let cardHeaderOrRotate = document.querySelectorAll(".card-header, .rotate");
-
+        let btns_start = document.querySelector(".btns");
         let menu = document.querySelector(".menu")
 
         if(mode) {
@@ -22,8 +21,8 @@ export const config = {
             cardsCat.forEach(item => item.classList.remove("card-cover"));
             cardHeaderOrRotate.forEach(item => item.classList.remove("none"));
             if(config.cat.length !== 0) {
-                btns.childNodes.forEach(item => item.classList.add("none"));
-                btns.childNodes.forEach(item => item.classList.remove("repeat"));
+                btns_start.childNodes.forEach(item => item.classList.add("none"));
+                btns_start.childNodes.forEach(item => item.classList.remove("repeat"));
             }
         } else {
             config.play = false;
@@ -32,7 +31,7 @@ export const config = {
             cardsCat.forEach(item => item.classList.add("card-cover"));
             cardHeaderOrRotate.forEach(item => item.classList.add("none"));
             if(config.cat.length !== 0) {
-                btns.childNodes.forEach(item => item.classList.remove("none"));
+                btns_start.childNodes.forEach(item => item.classList.remove("none"));
             }
         }
     }
