@@ -7,7 +7,6 @@ body{
     overflow-x: hidden;
 
     #app {
-        position: absolute;
         min-height: 100vh;
     }
     @media (max-width:430px){background-size:300px 300px}
@@ -154,7 +153,8 @@ header {
     transition:box-shadow .25s linear,transform .7s,-webkit-transform .7s}
 .card:hover{box-shadow:-1px 5px 15px 0 rgba(0,0,0,.5)}
 .translate{
-    -webkit-transform:rotateY(180deg);transform:rotateY(180deg)}
+    -webkit-transform:rotateY(180deg);transform:rotateY(180deg)
+}
 .back,.front{
     display:flex;position:absolute;width:100%;top:0;bottom:0;
     background-size:contain;background-repeat:no-repeat;
@@ -198,6 +198,7 @@ header {
     background-size:40px 40px}
 .end {
     position: absolute;
+    top: 0;
     height: calc(100%);
     width: 100vw;
     background-color: white;
@@ -249,8 +250,11 @@ nav{position:relative}
     -webkit-transform .5s cubic-bezier(.77,.2,.05,1)}
 .menuToggle span:first-child{-webkit-transform-origin:0 0;transform-origin:0 0}
 .menuToggle span:nth-last-child(2){-webkit-transform-origin:0 100%;transform-origin:0 100%}
-.menuToggle input:checked~span{opacity:1;-webkit-transform:rotate(45deg) translate(-2px,-1px);
-    transform:rotate(45deg) translate(-2px,-1px);background:#cdcdcd}
+.menuToggle input:checked~span{opacity:1;
+    -webkit-transform:rotate(45deg)
+    translate(-2px,-1px);
+    transform:rotate(45deg)
+    translate(-2px,-1px);background:#cdcdcd}
 .menuToggle input:checked~span:nth-last-child(3){opacity:0;-webkit-transform:rotate(0deg) scale(.2);transform:rotate(0deg) scale(.2)}
 .menuToggle input:checked~span:nth-last-child(2){opacity:1;-webkit-transform:rotate(-45deg) translateY(-1px);
     transform:rotate(-45deg) translateY(-1px)}

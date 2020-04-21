@@ -1,5 +1,4 @@
 import {config} from "./js/store/config"
-import "./js/store/routes"
 
 import categories from "./js/store/categories";
 
@@ -7,7 +6,7 @@ const container = document.getElementById('pageContainer');
 
 const cards_container = document.getElementById('cardsContainer');
 
-var game = '';
+let game = '';
 
  document.querySelector('input[name=switch]').addEventListener('change', (event) => {
      config.checked(event.target.checked)
@@ -144,14 +143,10 @@ class Game {
      }
      playAudio(src, effect){
          if (effect) {
-             switch (effect) {
-                 case "success":
-                     this.effect.src = "./assets/audio/correct.mp3";
-                     break;
-                 case "error":
-                     this.effect.src = "./assets/audio/error.mp3";
-                     break;
-             }
+             this.effect.src = effect === "success"
+                 ? this.effect.src = "./assets/audio/correct.mp3"
+                 : this.effect.src = "./assets/audio/error.mp3";
+
              return this.effect.play();
          }
          if(!src) return this.audio.play()
@@ -230,12 +225,9 @@ const MouseUp = (event) => {
         if (!config.play) return game = new Game(event.target);
         else game.playAudio()
     } else if(event.target.classList.contains('front') && document.querySelector("input[name=switch]").checked && !config.play){
-        config.cat.cards.find(item => {
-            if(item.word === event.target.innerText) {
-                audioPlay.src = "./assets/"+item.audioSrc;
-                audioPlay.play()
-            }
-        })
+        const item = config.cat.cards.find(item => item.word === event.target.innerText);
+        audioPlay.src = `./assets/${item.audioSrc}`;
+        audioPlay.play();
 
     } else if(event.target.classList.contains('front') && !event.target.classList.contains('inactive') && config.play){
         let word = event.target.innerText;
