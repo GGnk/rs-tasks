@@ -1,10 +1,10 @@
-# english-for-kids
+# Speakit
 ## Building and running on localhost
 
 Go to the project folder:
 
 ```sh
-cd english-for-kids/
+cd speakit
 ```
 
 First install dependencies:
@@ -28,5 +28,5 @@ npm run dev
 Open a file in the dist folder index.html (or via the console):
 
 ```sh
-start english-for-kids/dist/index.html
+start speakit/dist/index.html
 ```

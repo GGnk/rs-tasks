@@ -1,4 +1,4 @@
-english-for-kids/dist/*
-english-for-kids/node_modules
-english-for-kids/*.log
+speakit/dist/*
+speakit/node_modules
+speakit/*.log
 .idea
