@@ -57,18 +57,6 @@ module.exports =  ( env, argv ) => {
                       },
                       'sass-loader'],
                   },
-                  {
-                    test: /\.(png|svg|jpg|webmanifest)(\?v=\d+\.\d+\.\d+)?$/,
-                    use: [
-                      {
-                        loader: 'file-loader',
-                        options: {
-                          name: '[name].[ext]',
-                          outputPath: 'assets/',
-                        },
-                      },
-                    ],
-                  },
             ]
         },
 
