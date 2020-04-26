@@ -29,7 +29,7 @@ export const config = {
             pageCardsCat.forEach(item => item.classList.remove("green"));
             menu.classList.remove("green");
             cardsCat.forEach(item => item.classList.add("card-cover"));
-            cardHeaderOrRotate.forEach(item => item.classList.add("none"));
+            cardHeaderOrRotate.forEach(item => item.classList.add("none")); 
             if(config.cat.length !== 0) {
                 btns_start.childNodes.forEach(item => item.classList.remove("none"));
             }
