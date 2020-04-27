@@ -62,7 +62,7 @@ module.exports =  ( env, argv ) => {
 
         plugins: [
             new HtmlWebpackPlugin({
-                title: "English for Kids",
+                title: "Speakit",
                 filename: 'index.html',
                 template: './public/index.html',
                 inject: true,
