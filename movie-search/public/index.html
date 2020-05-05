@@ -9,6 +9,8 @@
     <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16x16.png">
     <link rel="manifest" href="assets/favicon/site.webmanifest">
     <link rel="mask-icon" href="assets/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
 
     <title><%= htmlWebpackPlugin.options.title %></title>
 
@@ -20,6 +22,83 @@
       <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>
     <div id="app">
+      <header>
+        <div class="collapse bg-header" id="navbarHeader">
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8 col-md-7 py-4">
+                <h4 class="text-white">About</h4>
+                <p class="text-muted">
+
+                </p>
+              </div>
+              <div class="col-sm-4 offset-md-1 py-4">
+                <h4 class="text-white">Contact</h4>
+                <ul class="list-unstyled">
+                  <li><a href="https://github.com/GGnk" class="text-white">My GitHub profile</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="navbar navbar-dark bg-header shadow-sm">
+          <div class="container d-flex justify-content-between">
+            <a href="#" class="navbar-brand d-flex align-items-center">
+              <svg class="bi bi-search" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 011.415 0l3.85 3.85a1 1 0 01-1.414 1.415l-3.85-3.85a1 1 0 010-1.415z" clip-rule="evenodd"/>
+                <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 100-11 5.5 5.5 0 000 11zM13 6.5a6.5 6.5 0 11-13 0 6.5 6.5 0 0113 0z" clip-rule="evenodd"/>
+              </svg>
+              <strong>MOVIE SEARCH</strong>
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"/>
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <main role="main">
+
+        <section class="search text-center">
+          <div class="container">
+            <div class="col-12 card">
+              <div class="card-body row no-gutters align-items-center">
+                <div class="col-auto">
+                  <svg class="bi bi-search" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 011.415 0l3.85 3.85a1 1 0 01-1.414 1.415l-3.85-3.85a1 1 0 010-1.415z" clip-rule="evenodd"/>
+                    <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 100-11 5.5 5.5 0 000 11zM13 6.5a6.5 6.5 0 11-13 0 6.5 6.5 0 0113 0z" clip-rule="evenodd"/>
+                  </svg>
+                </div>
+                <div class="col">
+                  <input class="form-control form-control-lg form-control-borderless" type="search" placeholder="Want to find a movie?">
+                </div>
+                <div class="col-auto">
+                  <button id="keyboard" class="keyboard btn" type="submit"><img src="assets/img/keyboard2.png"></button>
+
+                  <button id="search" class="btn btn-lg btn-my-red" type="submit">Search</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <div class="album py-5 bg-light">
+          <div class="container">
+
+              <div class="swiper-container">
+                <div class="swiper-wrapper"></div>
+                <div class="swiper-pagination"></div>
+              </div>
+          </div>
+        </div>
+
+      </main>
+
+      <footer class="text-muted">
+        <div class="container">
+          <!--Text-->
+        </div>
+      </footer>
     </div>
   </body>
   <script type="text/javascript" src="scripts.js"></script>
