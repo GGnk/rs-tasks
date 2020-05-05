@@ -1,10 +1,10 @@
-# Speakit
+# Movie search
 ## Building and running on localhost
 
 Go to the project folder:
 
 ```sh
-cd speakit
+cd movie-search
 ```
 
 First install dependencies:
@@ -28,5 +28,5 @@ npm run dev
 Open a file in the dist folder index.html (or via the console):
 
 ```sh
-start speakit/dist/index.html
+start movie-search/dist/index.html
 ```
