@@ -29,10 +29,9 @@ module.exports =  ( env, argv ) => {
 	const moduleIdentifierPlugin = isDevelopmentMode ? new webpack.NamedModulesPlugin() : new webpack.HashedModuleIdsPlugin();
 
   return({
-      // devServer: {
-      //     // eslint-disable-next-line no-undef
-      //     contentBase: [path.join(__dirname, 'public'), path.join(__dirname, 'assets')]
-      // },
+        devServer: {
+            contentBase: [path.join(__dirname, '../src/index.js'), path.join(__dirname, '../public/assets')]
+        },
         entry: ['./src/index.js', './src/scss/app.scss'],
         output: {
             // eslint-disable-next-line no-undef
@@ -41,34 +40,35 @@ module.exports =  ( env, argv ) => {
         },
         devtool: devtool,
         module: {
-            rules: [
+          rules: [
+            // { enforce: 'pre', test: /\.js$/, loader: 'eslint-loader'},
+            {
+                test: /\.js$/,
+                use: 'babel-loader',
+                exclude: /node_modules/
+            },
+            {
+              test: /\.scss$/,
+              use: [
+                'style-loader',
                 {
-                    test: /\.js$/,
-                    use: 'babel-loader',
-                    exclude: /node_modules/
-                  },
-                  {
-                    test: /\.scss$/,
-                    use: [
-                      'style-loader',
-                      {
-                        loader: 'file-loader',
-                        options: { outputPath: 'assets/css/', name: 'style.css'}
-                      },
-                      'sass-loader'],
-                  },
-            ]
+                  loader: 'file-loader',
+                  options: { outputPath: 'assets/css/', name: 'style.css'}
+                },
+                'sass-loader'],
+            },
+          ]
         },
 
         plugins: [
             new HtmlWebpackPlugin({
-                title: "Speakit",
+                title: "Movie Search",
                 filename: 'index.html',
                 template: './public/index.html',
                 inject: true,
                 chunks: ['index'],
                 // favicon: path.join(__dirname, '/public/favicon.ico'),
-                'meta': {
+                meta: {
                   'viewport': 'width=device-width, initial-scale=1, shrink-to-fit=no',
                   'msapplication-TileColor': '#da532c',
                   'theme-color': '#ffffff'
