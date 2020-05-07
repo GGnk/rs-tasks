@@ -53,5 +53,11 @@ async function getTranslation () {
 document.onreadystatechange = function(){
     if(document.readyState === 'complete'){
       butSearch.addEventListener('click', SEARCH)
+      inputSearchValue.addEventListener('keyup', function (e) {
+        if(e.keyCode === 13){
+          e.preventDefault();
+          SEARCH();
+        }
+      });
     }
 };

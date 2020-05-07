@@ -1,5 +1,6 @@
 export default class Movie {
   constructor() {
+    this.state = [];
     this.api = '';
     this.swiper = {};
 
@@ -14,22 +15,26 @@ export default class Movie {
     if (!this.api) return console.log('Install the key!');
     if (!word) return console.log(`Не введен запрос! В строке указано: ${word}`);
     this.swiper.removeAllSlides();
-    this.getMovie(word).then((item) => {
-      console.log(item.Search);
+    this.getMovie(word)
+          .then((items) => {
+            return items.Search.map((movie) => movie);
+          })
+          .then((movies)=> {
+            console.log(movies);
 
-      item.Search.forEach((movie) => {
-        this.swiper.appendSlide(this.card(movie));
-      });
-
-    });
+            movies.forEach((movie) => {
+              this.getRating(movie).then(r => this.swiper.appendSlide(this.card(r)));
+            });
+          });
   };
 
   static card(state) {
+    let noPoster = 'assets/img/no_poster.jpg';
     return `<div class="swiper-slide">
         <input style="display: none" type="text" value="${state.imdbID}">
         <div class="card mb-4" style="border: none">
           <div class="card-name">${state.Title}</div>
-          <img src="${state.Poster}" style="height: 400px" class="card-img-top" alt="${state.Title}">
+          <img src="${state.Poster === 'N/A'? noPoster:state.Poster}" style="height: 400px" class="card-img-top" alt="${state.Title}">
           <div class="card-body">
             <div class="d-flex justify-content-between align-items-center">
               <small class="text-info">
@@ -41,7 +46,7 @@ export default class Movie {
                   <path
                     d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
                 </svg>
-                6.6
+                ${state.imdbRating}
               </small>
             </div>
           </div>
@@ -56,4 +61,10 @@ export default class Movie {
     return await res.json();
   };
 
+  static async getRating(movie) {
+    const url = `https://www.omdbapi.com/?i=${movie.imdbID}&apikey=${this.api}`;
+
+    const res = await fetch(url).catch(console.log.bind(console));
+    return await res.json();
+  };
 }

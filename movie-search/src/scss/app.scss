@@ -57,6 +57,7 @@ body {
 .swiper-container {
   width: 100%;
   height: 100%;
+  padding-bottom: 30px;
 }
 .swiper-container {
   width: 100%;
@@ -80,6 +81,10 @@ body {
   -ms-flex-align: center;
   -webkit-align-items: center;
   align-items: center;
+
+  &:hover {
+    border: 4px dashed;
+  }
 }
 /* custmm bullets style */
 .swiper-pagination {
