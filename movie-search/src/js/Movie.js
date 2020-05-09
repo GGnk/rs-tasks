@@ -1,40 +1,51 @@
 export default class Movie {
-  constructor() {
-    this.state = [];
-    this.api = '';
-    this.swiper = {};
-
+  constructor(api, swiper) {
+    this.start(api, swiper);
   };
-  static start(api, swiper) {
-    if(!api || !swiper) return console.log('Install the key/class swiper !');
+  start(api, swiper) {
+    if(!api || !swiper) return console.log('Install the key OMDb Api and class Swiper !');
     this.api = api;
     this.swiper = swiper;
   };
 
-  static search(word) {
+  search(word, page = 1, loader = false) {
     if (!this.api) return console.log('Install the key!');
-    if (!word) return console.log(`Не введен запрос! В строке указано: ${word}`);
-    this.swiper.removeAllSlides();
-    this.getMovie(word)
-          .then((items) => {
-            return items.Search.map((movie) => movie);
-          })
-          .then((movies)=> {
-            console.log(movies);
 
-            movies.forEach((movie) => {
-              this.getRating(movie).then(r => this.swiper.appendSlide(this.card(r)));
-            });
+    // received a Promise object from Yandex Translate
+    word.then((item) => {
+      if (item == null) return console.log(`Не введен запрос!`);
+
+      this.getMovie(item, page)
+        .then((items) => {
+          //console.log(items)
+          let local = {
+            word: item,
+            countMovies: items.totalResults,
+            page: page,
+          };
+
+          this.setLocalStorage(local);
+
+          return loader ? this.checkMoviesForLoader(items) : this.checkMovies(items);
+        })
+        .then((movies)=> {
+          if (!movies) return movies
+          movies.forEach((movie) => {
+            this.getRating(movie).then(r => this.swiper.appendSlide(this.card(r)));
           });
+        });
+    });
+
   };
 
-  static card(state) {
+  // Movie card template
+  card(state) {
     let noPoster = 'assets/img/no_poster.jpg';
     return `<div class="swiper-slide">
         <input style="display: none" type="text" value="${state.imdbID}">
         <div class="card mb-4" style="border: none">
           <div class="card-name">${state.Title}</div>
-          <img src="${state.Poster === 'N/A'? noPoster:state.Poster}" style="height: 400px" class="card-img-top" alt="${state.Title}">
+          <img src="${(!state.Poster || state.Poster === 'N/A')? noPoster:state.Poster}" style="height: 400px" class="card-img-top" alt="${state.Title}">
           <div class="card-body">
             <div class="d-flex justify-content-between align-items-center">
               <small class="text-info">
@@ -54,17 +65,57 @@ export default class Movie {
       </div>`;
   };
 
-  static async getMovie(search, page = 1) {
+  // Search for a movie
+  async getMovie(search, page = 1) {
     const url = `https://www.omdbapi.com/?s=${search}&page=${page}&apikey=${this.api}`;
 
     const res = await fetch(url).catch(console.log.bind(console));
     return await res.json();
   };
 
-  static async getRating(movie) {
+  // Getting a rating
+  async getRating(movie) {
     const url = `https://www.omdbapi.com/?i=${movie.imdbID}&apikey=${this.api}`;
 
     const res = await fetch(url).catch(console.log.bind(console));
     return await res.json();
   };
+
+  // Checking the list for empty space
+  checkMovies(list) {
+    let errorObject = document.querySelector('.error');
+
+    if (list.Response === 'False') {
+      errorObject.classList.add('active');
+      errorObject.innerText = `No results for "${list.Error}"`;
+      return false
+    }
+
+    this.swiper.removeAllSlides();
+    errorObject.classList.remove('active');
+    errorObject.innerText = '';
+    return list.Search.map((movie) => movie);
+  }
+
+  checkMoviesForLoader(list) {
+    if (list.Response === 'False') return false;
+
+    return list.Search.map((movie) => movie);
+  }
+
+  setLocalStorage(local) {
+    localStorage.setItem('movieSearch', JSON.stringify(local));
+  }
+
+  getLocalStorage() {
+    return JSON.parse(localStorage.getItem('movieSearch'))
+  }
+
+  loader() {
+    let local = this.getLocalStorage();
+    let promise = new Promise((resolve, reject) => {
+      resolve(local.word);
+    });
+    this.search(promise, ++local.page, true);
+  }
 }
