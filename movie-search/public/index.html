@@ -16,6 +16,7 @@
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900">
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.min.css">
   </head>
   <body>
     <noscript>
@@ -70,7 +71,12 @@
                   </svg>
                 </div>
                 <div class="col">
-                  <input class="form-control form-control-lg form-control-borderless" type="search" placeholder="Want to find a movie?">
+                  <input class="form-control form-control-lg form-control-borderless"
+                         type="search"
+                         placeholder="Want to find a movie?"
+                         autofocus
+                         autocomplete="off"
+                  >
                 </div>
                 <div class="col-auto">
                   <button id="keyboard" class="keyboard btn" type="submit"><img src="assets/img/keyboard2.png"></button>
@@ -82,12 +88,18 @@
           </div>
         </section>
 
-        <div class="album py-5 bg-light">
+        <div class="album py-1 bg-light">
           <div class="container">
+              <div class="translate"></div>
+              <div class="error"></div>
 
               <div class="swiper-container">
                 <div class="swiper-wrapper"></div>
                 <div class="swiper-pagination"></div>
+
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
+
               </div>
           </div>
         </div>

@@ -1,9 +1,11 @@
 import '@babel/polyfill';
 import 'bootstrap';
 import Movie from './js/Movie';
+import Translate from "./js/Translate";
 import Swiper from 'swiper';
 
-const apiKey = '5e0576fa';
+const apiKeyMovies = '5e0576fa';
+const apiKeyTranslate = 'trnsl.1.1.20190221T052313Z.158d4792ab8f3f79.243113d71b405e2ea3fb9ccbbd1c4a6f0bbf1e56';
 
 const mySwiper = new Swiper('.swiper-container', {
     slidesPerView: 1,
@@ -25,12 +27,16 @@ const mySwiper = new Swiper('.swiper-container', {
             spaceBetween: 40
         },
     },
-    lazy: true,
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
     pagination: {
         el: '.swiper-pagination',
         clickable: true,
+        dynamicBullets: true,
         renderBullet: function (index, className) {
-            return '<span class="' + className + '">' + (index + 1) + '</span>';
+          return '<span class="' + className + '">' + (index + 1) + '</span>';
         },
     },
 });
@@ -38,17 +44,16 @@ const mySwiper = new Swiper('.swiper-container', {
 const inputSearchValue = document.querySelector('input[type=search]');
 const butSearch = document.querySelector('#search');
 
-Movie.start(apiKey, mySwiper);
-Movie.search('dream');
+const myMovie = new Movie(apiKeyMovies, mySwiper);
+const myTranslate = new Translate(apiKeyTranslate);
 
-const SEARCH = () => Movie.search(inputSearchValue.value);
+myMovie.search(myTranslate.checkLanguage('people'), 2);
 
-async function getTranslation () {
-    const url = 'https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20200322T155651Z.de98a60e6a99185e.089aea4237b51c6db082c966f27a7895cd1e8b44&text= agree &lang=en-ru';
-    const res = await fetch(url);
-    const data = await res.json();
-    console.log(data.text);
-}
+const SEARCH = () => myMovie.search(myTranslate.checkLanguage(inputSearchValue.value), 2);
+
+mySwiper.on('reachEnd', function () {
+    myMovie.loader();
+});
 
 document.onreadystatechange = function(){
     if(document.readyState === 'complete'){
