@@ -5,7 +5,7 @@ export default class Translate {
   start(api) {
     if(!api) return console.log('Install the key Yandex translate !');
     this.api = api;
-  };
+  }
 
   async checkLanguage(word) {
     if (!word) return null;

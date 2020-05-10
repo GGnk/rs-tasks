@@ -1,7 +1,9 @@
 @import "~bootstrap";
 @import "~swiper/src/swiper.scss";
+
 $width-keyboard: 33%;
 $bg-default: #2D2C2A;
+$animate: 1s;
 body {
   margin: 0;
   padding: 0;
@@ -57,11 +59,15 @@ body {
 .swiper-container {
   width: 100%;
   height: 100%;
-  padding-bottom: 30px;
+  padding-bottom: 30px!important;
 
   .swiper-pagination-bullet {
     width: 16px;
     height: 16px;
+  }
+  .swiper-button-next:after, .swiper-button-prev:after {
+    font-size: 70px;
+    font-weight: bold;
   }
 
 }
@@ -85,7 +91,104 @@ body {
   align-items: center;
 
   &:hover {
-    border: 4px dashed;
+    -webkit-box-shadow:
+      inset 0 -1px 0 rgba(0,0,0,.5),
+      inset 0 1px 0 rgba(255,255,255,.6);
+    -moz-box-shadow:
+      inset 0 -1px 0 rgba(0,0,0,.5),
+      inset 0 1px 0 rgba(255,255,255,.6);
+    box-shadow:
+      inset 0 -1px 0 rgba(0,0,0,.5),
+      inset 0 1px 0 rgba(255,255,255,.6);
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 20px;
+    border: 1px solid;
+    -webkit-transition: $animate;
+    -moz-transition: $animate;
+    transition: $animate;
+
+  }
+  &:hover img {
+    -webkit-box-shadow:
+      inset 0 0 2px rgba(0,0,0,.8),
+      inset 0 2px 0 rgba(255,255,255,.5),
+      inset 0 -7px 0 rgba(0,0,0,.6),
+      inset 0 -9px 0 rgba(255,255,255,.3);
+    -moz-box-shadow:
+      inset 0 0 2px rgba(0,0,0,.8),
+      inset 0 2px 0 rgba(255,255,255,.5),
+      inset 0 -7px 0 rgba(0,0,0,.6),
+      inset 0 -9px 0 rgba(255,255,255,.3);
+    box-shadow: inset 0 0 2px rgba(0,0,0,.8),
+    inset 0 2px 0 rgba(255,255,255,.5),
+    inset 0 -7px 0 rgba(0,0,0,.6),
+    inset 0 -9px 0 rgba(255,255,255,.3);
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 20px;
+    -webkit-transition: $animate;
+    -moz-transition: $animate;
+    transition: $animate;
+  }
+
+  &:hover .card-body p {
+    opacity: 1;
+  }
+  &:hover .card-name {
+    background-color: #ff0000;
+  }
+}
+
+.card {
+  .card-name {
+    position: absolute;
+    background-color: black;
+    width: 100%;
+    opacity: 0.8;
+    color: white;
+    top: 44px;
+    transform: skewY(-12deg);
+    -webkit-transition: $animate;
+    -moz-transition: $animate;
+    transition: $animate;
+  }
+  .card-body {
+    p {
+      opacity: 0;
+      position: absolute;
+      bottom: 25%;
+      left: 0;
+      color: white;
+      width: fit-content;
+      background: red;
+      transform: translate3d(10px, 40px, 10px);
+
+      font-size: 14px;
+      text-align: left;
+      padding-left: 5px;
+      -webkit-transition: $animate;
+      -moz-transition: $animate;
+      transition: $animate;
+
+      u {
+        color: gold;
+      }
+    }
+  }
+}
+
+.ttt {
+  position: absolute;
+  right: 98px;
+  bottom: -3px;
+  padding: 10px;
+  .loading {
+    display: none;
+    text-align: center;
+    &.active {
+      display: block;
+    }
   }
 }
 

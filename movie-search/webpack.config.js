@@ -41,7 +41,7 @@ module.exports =  ( env, argv ) => {
         devtool: devtool,
         module: {
           rules: [
-            // { enforce: 'pre', test: /\.js$/, loader: 'eslint-loader'},
+            { enforce: 'pre', test: /\.js$/, loader: 'eslint-loader'},
             {
                 test: /\.js$/,
                 use: 'babel-loader',
