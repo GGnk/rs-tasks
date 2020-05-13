@@ -8,6 +8,7 @@ export default class Translate {
   }
 
   async checkLanguage(word) {
+    if(!this.api) return console.log('Install the key Yandex translate !');
     if (!word) return null;
     const url = `https://translate.yandex.net/api/v1.5/tr.json/detect?key=${this.api}&text=${word}&hint=ru,en`;
     return await fetch(url)

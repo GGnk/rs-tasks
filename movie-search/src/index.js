@@ -4,14 +4,13 @@ import Movie from './js/Movie';
 import Translate from "./js/Translate";
 import Swiper from 'swiper';
 
-const apiKeyMovies = '5e0576fa';
-const apiKeyTranslate = 'trnsl.1.1.20190221T052313Z.158d4792ab8f3f79.243113d71b405e2ea3fb9ccbbd1c4a6f0bbf1e56';
+const apiKeyMovies = process.env.API_KEY_MOVIES;
+const apiKeyTranslate = process.env.API_KEY_TRANSLATE;
 
 const mySwiper = new Swiper('.swiper-container', {
     slidesPerView: 1,
     spaceBetween: 20,
     breakpoints: {
-        // when window width is >= 320px
         // when window width is >= 480px
         480: {
             slidesPerView: 2,
