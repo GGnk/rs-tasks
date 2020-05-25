@@ -1,5 +1,3 @@
-# fancy-weather
-
 ## Project setup
 ```
 npm install
