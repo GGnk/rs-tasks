@@ -1,22 +1,8 @@
-## Project setup
-```
-npm install
-```
+# Fancy Weather
+## Building and running on localhost
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+Go to the project folder:
 
-### Compiles and minifies for production
+```sh
+cd fancy-weather
 ```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
