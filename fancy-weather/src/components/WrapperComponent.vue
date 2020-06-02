@@ -2,6 +2,7 @@
   <div class="main-wrapper">
     <InfoBlock/>
     <MapBlock/>
+
   </div>
 </template>
 

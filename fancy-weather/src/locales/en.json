@@ -1,0 +1,34 @@
+{
+  "alert": {
+    "GET_DEFAULT_CITY": {
+      "text": "The city of the developer who wrote this app",
+      "title": "Loading the default city!"
+    },
+    "GET_CITY_AND_WEATHER": {
+      "text": "City or Country not found!",
+      "title": "Result of search"
+    },
+    "SEARCH": {
+      "text": "The search will occur when you enter at least 2 characters!",
+      "title": "The search rule!"
+    },
+    "UPDATE": "Update successfully!"
+  },
+  "sysErr": {
+    "SET_INFO_GEOLOCATION": {
+      "text": "System message",
+      "title": "Allow me to determine Your location"
+    },
+    "UnexpectedCrash": {
+      "text": "System message",
+      "title": "Unexpected crash!"
+    }
+  },
+  "wind": "Wind",
+  "searchP": "Start search",
+  "search": "Search",
+  "longitude": "Longitude",
+  "latitude": "Latitude",
+  "humidity": "Humidity",
+  "feelsLike": "Feels Like"
+}

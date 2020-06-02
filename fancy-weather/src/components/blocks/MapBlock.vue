@@ -1,12 +1,12 @@
 <template>
-  <div class="map-cluster">
+  <div v-if="getLoader" class="map-cluster">
     <div class="map-cluster__map">
       <iframe class="map-iframe"
               v-if="getGeolocation"
-              :src="`https://www.google.com/maps/embed/v1/view?center=${getGeolocation.geometry.lat},${getGeolocation.geometry.lng}&amp;zoom=10&amp;key=AIzaSyBWWZnqHV3asW7DM3yCQ0dxSHjj_J9LkwE&amp;language=en`"></iframe>
+              :src="`https://www.google.com/maps/embed/v1/view?center=${getGeolocation.geometry.lat},${getGeolocation.geometry.lng}&amp;zoom=10&amp;key=AIzaSyBWWZnqHV3asW7DM3yCQ0dxSHjj_J9LkwE&amp;language=${getSetting.lang}`"></iframe>
     </div>
-    <div class="map-cluster__coordinates"><p>Latitude: {{getGeolocation? getGeolocation.geometry.lat.toFixed(2): ''}}</p>
-      <p>Longitude: {{getGeolocation? getGeolocation.geometry.lat.toFixed(2): ''}}</p></div>
+    <div class="map-cluster__coordinates"><p>{{ $t('latitude') }}: {{getDegMinLat}}</p>
+      <p>{{ $t('longitude') }}: {{getDegMinLng}}</p></div>
   </div>
 </template>
 
@@ -18,7 +18,7 @@ export default {
   props: {
   },
   computed: {
-    ...mapGetters(['getWeather', 'getGeolocation', 'getDate', 'getListDays']),
+    ...mapGetters(['getWeather', 'getGeolocation', 'getDate', 'getListDays', 'getDegMinLat', 'getDegMinLng', 'getLoader', 'getSetting']),
   }
 }
 </script>
