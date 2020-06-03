@@ -9,7 +9,7 @@
       </button>
       <div class="language-menu">
         <select class="drop-down-list" v-model="lang">
-          <option v-for="(lang, i) in getSetting.locales" :key="i">{{lang}}</option>
+          <option class="opt" v-for="(lang, i) in getSetting.locales" :key="i">{{lang}}</option>
         </select>
       </div>
       <div class="form_toggle" v-if="getLoader">
@@ -56,8 +56,10 @@ export default {
       }
     }
   },
-  mounted() {
-
+  watch: {
+    query(q) {
+      q.length > 2 ? this.SEARCH({fastQuery: true}): ''
+    }
   },
   methods: {
     ...mapActions(['SEARCH', 'UPDATE', 'FC', 'SET_LOCALES']),
@@ -82,6 +84,10 @@ export default {
     text-transform: uppercase;
     transition: all 0.2s;
   }
+  .opt {
+    background-color: grey;
+  }
+
   .form_toggle {
     display: inline-block;
     overflow: hidden;

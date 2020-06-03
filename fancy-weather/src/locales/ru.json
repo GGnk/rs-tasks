@@ -24,6 +24,29 @@
       "title": "Неожиданный сбой!"
     }
   },
+  "days": {
+    "Sunday": "Воскресенье",
+    "Monday": "Понедельник",
+    "Tuesday": "Вторник",
+    "Wednesday": "Среда",
+    "Thursday": "Четверг",
+    "Friday": "Пятница",
+    "Saturday": "Суббота"
+  },
+  "months": {
+    "January": "Января",
+    "February": "Февраля",
+    "March": "Марта",
+    "April": "Апрель",
+    "May": "Мая",
+    "June": "Июня",
+    "July": "Июля",
+    "August": "Августа",
+    "September": "Сентября",
+    "October": "Октября",
+    "November": "Ноября",
+    "December": "Декабря"
+  },
   "feelsLike": "Ощущается как",
   "humidity": "Влажность",
   "latitude": "Широта",

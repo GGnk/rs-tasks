@@ -27,6 +27,7 @@
 
 <script>
   import {mapGetters, mapMutations} from "vuex";
+  import i18n from "./../../i18n";
 
 export default {
   name: 'Info',
@@ -62,7 +63,7 @@ export default {
       let h = Math.abs(d.getHours() - (Math.abs(new Date().getTimezoneOffset() / 60) - (this.getGeolocation? this.getGeolocation.annotations.timezone.offset_sec / 60 / 60 : 0)));
       let m = d.getMinutes() < 10 ? '0' + d.getMinutes() : d.getMinutes();
       let s = d.getSeconds() < 10 ? '0' + d.getSeconds() : d.getSeconds();
-      this.currentTime =`${day} ${date} ${month} ${year} ${h}:${m}:${s}`
+      this.currentTime =`${i18n.t('days.'+day)} ${date} ${i18n.t('months.'+month)} ${year} ${h}:${m}:${s}`
     },
   }
 }

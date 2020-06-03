@@ -10,7 +10,7 @@ function getDay(plus) {
   let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
   d.setDate(d.getDate()+plus);
   let day = days[d.getDay()];
-  return `${day}`
+  return i18n.t('days.'+day)
 }
 
 export default new Vuex.Store({
@@ -112,7 +112,7 @@ export default new Vuex.Store({
     SET_INFO_GEOLOCATION ({commit, dispatch}) {
       window.navigator.geolocation.getCurrentPosition(
           function(geolocation) {
-            dispatch('GET_CITY_AND_WEATHER', geolocation)
+            dispatch('GET_CITY_AND_WEATHER', {geolocation: geolocation})
           },
           (err) => commit('ALERT_HANDLER', {
             text: `${i18n.t('sysErr.SET_INFO_GEOLOCATION.text')}: ${err.message}`,
@@ -121,7 +121,11 @@ export default new Vuex.Store({
       )
     },
 
-    GET_CITY_AND_WEATHER ({state, commit, dispatch}, geolocation = null, query = state.query, language = 'en') {
+    GET_CITY_AND_WEATHER ({state, commit, dispatch}, payload) {
+      let geolocation = payload.geolocation
+      let query = (payload.query || state.query)
+      let language = (payload.language || state.setting.lang)
+      let fastQuery = (payload.fastQuery || false)
       let q = ''
       if(query) q = query
       else {
@@ -137,10 +141,13 @@ export default new Vuex.Store({
               dispatch('GET_WEATHER_COORDINATES', {geolocation: e.data.results[0]})
               state.loader = true
             } else {
-              commit('ALERT_HANDLER', {
-                text: `${i18n.t('alert.GET_CITY_AND_WEATHER.text')}`,
-                title: `${i18n.t('alert.GET_CITY_AND_WEATHER.title')}`,
-                type:'warn'})
+              if (!fastQuery) {
+                commit('ALERT_HANDLER', {
+                  text: `${i18n.t('alert.GET_CITY_AND_WEATHER.text')}`,
+                  title: `${i18n.t('alert.GET_CITY_AND_WEATHER.title')}`,
+                  type: 'warn'
+                })
+              }
             }
           })
           .catch((err) => commit('ALERT_HANDLER', {
@@ -167,18 +174,18 @@ export default new Vuex.Store({
               type:'error'}))
       }
     },
-    SEARCH ({state, commit, dispatch}) {
+    SEARCH ({state, commit, dispatch}, payload) {
       if (!state.query || state.query.length < 2) {
         return commit('ALERT_HANDLER', {
           text: `${i18n.t('alert.SEARCH.text')}`,
           title: `${i18n.t('alert.SEARCH.title')}`,
           type:'warn'})
       }
-      dispatch('GET_CITY_AND_WEATHER')
+      dispatch('GET_CITY_AND_WEATHER', {geolocation: null, fastQuery: payload.fastQuery})
     },
     UPDATE({state, commit, dispatch}) {
       state.query = localStorage.getItem('query')
-      dispatch('GET_CITY_AND_WEATHER')
+      dispatch('GET_CITY_AND_WEATHER', {geolocation: null})
       state.query = ''
       commit('ALERT_HANDLER', {
         title: `${i18n.t('alert.UPDATE')}`,
@@ -192,7 +199,7 @@ export default new Vuex.Store({
       setTimeout(() => {
         if(state.weather == null) {
           state.query = 'Saratov'
-          dispatch('GET_CITY_AND_WEATHER')
+          dispatch('GET_CITY_AND_WEATHER', {geolocation: null})
           state.loader = true
           commit('ALERT_HANDLER', {
             title: `${i18n.t('alert.GET_DEFAULT_CITY.title')}`,
@@ -205,7 +212,7 @@ export default new Vuex.Store({
     SET_LOCALES({state, commit, dispatch}, loc) {
       i18n.locale = loc
       commit('SET_LOCALSTORAGE', {key: 'lang', value: loc})
-      dispatch('GET_WEATHER_COORDINATES', {geolocation: state.geolocation, lang: loc})
+      dispatch('GET_CITY_AND_WEATHER', {geolocation: state.geolocation, language: loc})
     }
   },
   modules: {
