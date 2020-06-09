@@ -191,7 +191,7 @@ export default new Vuex.Store({
         title: `${i18n.t('alert.UPDATE')}`,
         type:'success'})
     },
-    FC({state, commit, dispatch}, unit){
+    GET_DEGREE({state, commit, dispatch}, unit){
       commit('SET_LOCALSTORAGE', { key: 'units', value: unit})
       dispatch('GET_WEATHER_COORDINATES', { geolocation: state.geolocation, units: state.setting.units})
     },
@@ -214,7 +214,5 @@ export default new Vuex.Store({
       commit('SET_LOCALSTORAGE', {key: 'lang', value: loc})
       dispatch('GET_CITY_AND_WEATHER', {geolocation: state.geolocation, language: loc})
     }
-  },
-  modules: {
   }
 })

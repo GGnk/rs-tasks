@@ -15,11 +15,11 @@
       <div class="form_toggle" v-if="getLoader">
         <div class="form_toggle-item item-1">
           <input id="fid-1" type="radio" name="radio" :checked="getSetting.units === 'I'">
-          <label @click="FC('I')" for="fid-1">°F</label>
+          <label @click="GET_DEGREE('I')" for="fid-1">°F</label>
         </div>
         <div class="form_toggle-item item-2">
           <input id="fid-2" type="radio" name="radio" :checked="getSetting.units === 'M'">
-          <label @click="FC('M')" for="fid-2">°C</label>
+          <label @click="GET_DEGREE('M')" for="fid-2">°C</label>
         </div>
       </div>
     </div>
@@ -35,8 +35,6 @@
 
 export default {
   name: 'HeaderComponent',
-  props: {
-  },
   computed: {
     ...mapGetters(['getQuery', 'getLoader', 'getSetting']),
     query: {
@@ -62,7 +60,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['SEARCH', 'UPDATE', 'FC', 'SET_LOCALES']),
+    ...mapActions(['SEARCH', 'UPDATE', 'GET_DEGREE', 'SET_LOCALES']),
     ...mapMutations(['SET_QUERY'])
   }
 }

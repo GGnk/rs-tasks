@@ -9,17 +9,13 @@
 <script>
 import InfoBlock from '@/components/blocks/InfoBlock'
 import MapBlock from '@/components/blocks/MapBlock'
+
 export default {
   name: 'WrapperComponent',
   components: {
     InfoBlock,
     MapBlock
   },
-  props: {
-  }
 }
 </script>
 
-<style lang="scss" scoped>
-
-</style>
