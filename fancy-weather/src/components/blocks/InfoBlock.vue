@@ -3,7 +3,7 @@
     <p class="weather-data-cluster__location">
       {{getNameCity}}
     </p>
-    <p class="weather-data-cluster__date-time">{{this.currentTime}}</p>
+    <p class="weather-data-cluster__date-time">{{currentTime}}</p>
     <p class="weather-data-cluster__temperature-today">
       {{!getWeather?'':getWeather[0].temp.toFixed()}}
     </p>
